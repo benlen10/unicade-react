@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import GameGrid from './GameGrid';
+import { CssBaseline } from '@mui/material';
 
 function App() {
   const [platforms, setPlatforms] = useState([]);
@@ -29,10 +30,13 @@ function App() {
   }, [selectedPlatform]);
 
   return (
-    <div className="app">
-      <Sidebar platforms={platforms} setSelectedPlatform={setSelectedPlatform} />
-      <GameGrid games={games} />
-    </div>
+    <>
+      <CssBaseline />
+      <div className="app">
+        <Sidebar platforms={platforms} setSelectedPlatform={setSelectedPlatform} />
+        <GameGrid games={games} />
+      </div>
+    </>
   );
 }
 
