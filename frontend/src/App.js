@@ -1,10 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import GameGrid from './GameGrid';
 import { CssBaseline } from '@mui/material';
 import { Container } from 'react-bootstrap';
+import './App.css'; // Ensure you have the correct styles imported
 
 function App() {
   const [platforms, setPlatforms] = useState([]);
@@ -34,10 +34,10 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Container fluid className="app d-flex">
+      <div className="app d-flex">
         <Sidebar platforms={platforms} setSelectedPlatform={setSelectedPlatform} />
         <GameGrid games={games} />
-      </Container>
+      </div>
     </>
   );
 }
