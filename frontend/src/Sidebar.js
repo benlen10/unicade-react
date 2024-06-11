@@ -3,10 +3,10 @@ import { List, ListItem, ListItemText, Drawer, Typography } from '@mui/material'
 import { styled } from '@mui/system';
 
 const SidebarContainer = styled(Drawer)(({ theme }) => ({
-  width: 250,
+  width: 200,
   flexShrink: 0,
   '& .MuiDrawer-paper': {
-    width: 250,
+    width: 200,
     boxSizing: 'border-box',
   },
 }));
