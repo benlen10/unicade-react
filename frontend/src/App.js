@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 import GameGrid from './GameGrid';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, Button } from '@mui/material';
 import { Container } from 'react-bootstrap';
-import './App.css'; // Ensure you have the correct styles imported
+import './App.css';
 
 function App() {
   const [platforms, setPlatforms] = useState([]);
@@ -31,12 +31,27 @@ function App() {
     }
   }, [selectedPlatform]);
 
+  const handleScan = async () => {
+    try {
+      await axios.post('http://localhost:3001/scan');
+      const response = await axios.get(`http://localhost:3001/games?platform=${selectedPlatform}`);
+      setGames(response.data);
+    } catch (error) {
+      console.error('Error scanning for new games:', error);
+    }
+  };
+
   return (
     <>
       <CssBaseline />
       <div className="app d-flex">
         <Sidebar platforms={platforms} setSelectedPlatform={setSelectedPlatform} />
-        <GameGrid games={games} />
+        <div className="content">
+          <Button variant="contained" color="primary" onClick={handleScan}>
+            Scan for New Games
+          </Button>
+          <GameGrid games={games} />
+        </div>
       </div>
     </>
   );
