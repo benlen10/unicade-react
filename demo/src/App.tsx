@@ -8,6 +8,7 @@ import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
+import useRunScript from './hooks/useRunScript'
 
 export interface GameQuery {
   genre: Genre | null;
@@ -19,8 +20,15 @@ export interface GameQuery {
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery)
 
+  const { output, error, handleRunScript } = useRunScript();
+
+  const run = () => {
+    handleRunScript('scripts/test-script.sh');
+  };
+
 
   return (
+    
     <Grid
       templateAreas={{
         base: `"nav" "main"`,
@@ -31,6 +39,11 @@ function App() {
         lg: "200px 1fr",
       }}
     >
+      <header className="App-header">
+        <button onClick={run}>Run Script</button>
+        {output && <pre>{output}</pre>}
+        {error && <pre style={{ color: 'red' }}>{error}</pre>}
+      </header>
       <GridItem area="nav">
         <NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText})}/>
       </GridItem>
