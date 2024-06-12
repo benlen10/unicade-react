@@ -1,6 +1,20 @@
 {
   "directories": [
-    "/Volumes/Expansion/ROMs/Playstation/",
-    "/Volumes/Expansion/ROMs/PSP/"
+    "/Volumes/Expansion/ROMs/Microsoft Xbox/",
+    "/Volumes/Expansion/ROMs/Nintendo 3DS/",
+    "/Volumes/Expansion/ROMs/Nintendo 64/",
+    "/Volumes/Expansion/ROMs/Nintendo DS/",
+    "/Volumes/Expansion/ROMs/Nintendo Gamecube/",
+    "/Volumes/Expansion/ROMs/Nintendo GBA/",
+    "/Volumes/Expansion/ROMs/Nintendo NES/",
+    "/Volumes/Expansion/ROMs/Nintendo SNES/",
+    "/Volumes/Expansion/ROMs/Nintendo Switch/",
+    "/Volumes/Expansion/ROMs/Nintendo Wii/",
+    "/Volumes/Expansion/ROMs/Sega Dreamcast/",
+    "/Volumes/Expansion/ROMs/Sega Genesis/",
+    "/Volumes/Expansion/ROMs/Sony Playstation 1/",
+    "/Volumes/Expansion/ROMs/Sony Playstation 2/",
+    "/Volumes/Expansion/ROMs/Sony Playstation 3/",
+    "/Volumes/Expansion/ROMs/Sony PSP/"
   ]
 }

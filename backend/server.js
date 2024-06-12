@@ -17,8 +17,22 @@ const configFilePath = './config.json';
 const mobyGamesApiKey = 'moby_uue5l7SYfx4oQoAicNd4Sy5SkT0'; // Replace with your actual API key
 
 const platformIdMap = {
-  Playstation: 6,
-  PSP: 46
+  'Microsoft Xbox': 13,
+  'Nintendo 3DS': 101,
+  'Nintendo 64': 9,
+  'Nintendo DS': 44,
+  'Nintendo Gamecube': 14,
+  'Nintendo GBA': 12,
+  'Nintendo NES': 22,
+  'Nintendo SNES': 15,
+  'Nintendo Switch': 203,
+  'Nintendo Wii': 82,
+  'Sega Dreamcast': 8,
+  'Sega Genesis': 16,
+  'Sony Playstation 1': 6,
+  'Sony Playstation 2': 7,
+  'Sony Playstation 3': 81,
+  'Sony PSP': 46
 };
 
 // Function to pause execution for a given duration
