@@ -142,6 +142,31 @@ app.post('/scan', async (req, res) => {
   res.send('Directory scan complete');
 });
 
+// Endpoint to run a game script
+app.post('/run-game', (req, res) => {
+  const { gameName, platform } = req.body;
+  if (!gameName || !platform) {
+    return res.status(400).send('Missing gameName or platform');
+  }
+
+  const scriptPath = path.resolve(__dirname, 'runGame.sh');
+  const command = `${scriptPath} "${gameName}" "${platform}"`;
+
+  exec(command, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error running script: ${error.message}`);
+      return res.status(500).send(`Error running script: ${error.message}`);
+    }
+    if (stderr) {
+      console.error(`Script error: ${stderr}`);
+      return res.status(500).send(`Script error: ${stderr}`);
+    }
+
+    console.log(`Script output: ${stdout}`);
+    res.send(`Script executed successfully: ${stdout}`);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
