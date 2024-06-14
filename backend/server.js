@@ -4,6 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
+const { exec } = require('child_process');
 
 const app = express();
 const port = 3001;
@@ -52,8 +53,8 @@ async function scanDirectories() {
     const files = fs.readdirSync(dir);
     for (const file of files) {
       const filePath = path.join(dir, file);
-      if (fs.lstatSync(filePath).isFile() && path.extname(file) === '.rom') {
-        const gameTitle = path.basename(file, '.rom');
+      if (fs.lstatSync(filePath).isFile()) { // && path.extname(file) === '.rom'
+        const gameTitle = path.basename(file, path.extname(file)); // , '.rom'
         console.log(`Found ROM file: ${filePath}`);
         await fetchAndSaveGameMetadata(gameTitle, platform, filePath);
         await delay(1500); // Pause for 1.5 seconds between API calls
@@ -72,7 +73,7 @@ async function fetchGameMetadata(gameTitle, platform) {
     return null;
   }
 
-  const apiUrl = `https://api.mobygames.com/v1/games?title=${encodeURIComponent(gameTitle)}&platform=${platformId}&api_key=${mobyGamesApiKey}`;
+  const apiUrl = `https://api.mobygames.com/v1/games?title=${encodeURIComponent(gameTitle.replace(" - ", ""))}&platform=${platformId}&api_key=${mobyGamesApiKey}`;
   console.log(`Fetching metadata for ${gameTitle} on ${platform} from ${apiUrl}`);
   try {
     const response = await axios.get(apiUrl);
@@ -144,13 +145,13 @@ app.post('/scan', async (req, res) => {
 
 // Endpoint to run a game script
 app.post('/run-game', (req, res) => {
-  const { gameName, platform } = req.body;
-  if (!gameName || !platform) {
-    return res.status(400).send('Missing gameName or platform');
+  const { filePath, platform } = req.body;
+  if (!filePath || !platform) {
+    return res.status(400).send('Missing filePath or platform');
   }
 
   const scriptPath = path.resolve(__dirname, 'runGame.sh');
-  const command = `${scriptPath} "${gameName}" "${platform}"`;
+  const command = `${scriptPath} "${filePath}" "${platform}"`;
 
   exec(command, (error, stdout, stderr) => {
     if (error) {

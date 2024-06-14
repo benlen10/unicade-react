@@ -7,7 +7,7 @@ const GameGrid = ({ games }) => {
   const handleGameClick = async (game) => {
     try {
       const response = await axios.post('http://localhost:3001/run-game', {
-        gameName: game.GameTitle,
+        filePath: game.FilePath,
         platform: game.Platform
       });
       console.log(response.data);
