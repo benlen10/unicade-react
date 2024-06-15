@@ -73,7 +73,7 @@ async function fetchGameMetadata(gameTitle, platform) {
     return null;
   }
 
-  const apiUrl = `https://api.mobygames.com/v1/games?title=${encodeURIComponent(gameTitle.replace(" - ", ""))}&platform=${platformId}&api_key=${mobyGamesApiKey}`;
+  const apiUrl = `https://api.mobygames.com/v1/games?title=${encodeURIComponent(gameTitle.replace(" - ", ": "))}&platform=${platformId}&api_key=${mobyGamesApiKey}`;
   console.log(`Fetching metadata for ${gameTitle} on ${platform} from ${apiUrl}`);
   try {
     const response = await axios.get(apiUrl);
